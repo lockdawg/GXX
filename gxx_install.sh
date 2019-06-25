@@ -1,15 +1,15 @@
 #!/bin/bash
 
 TMP_FOLDER=$(mktemp -d)
-CONFIG_FILE='bcz.conf'
-CONFIGFOLDER='/root/.bcz'
-COIN_DAEMON='/usr/local/bin/bczd'
-COIN_CLI='/usr/local/bin/bcz-cli'
-COIN_REPO='https://github.com/BitcoinCZ/bitcoincz/releases/download/6.0.0.8/linux-x64.tar.gz'
-COIN_NAME='BCZ'
-COIN_RPC=29501
-COIN_PORT=29500
-#COIN_BS='http://bootstrap.zip'
+CONFIG_FILE='GravityCoin.conf'
+CONFIGFOLDER='/root/.GravityCoin'
+COIN_DAEMON='/usr/local/bin/GravityCoind'
+COIN_CLI='/usr/local/bin/GravityCoin-cli'
+COIN_REPO='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/4.0.6.5/linux-x64.tar.gz'
+COIN_NAME='GXX'
+COIN_RPC=29200
+COIN_PORT=29100
+COIN_BS='hhttps://github.com/GravityCoinOfficial/GravityCoin/releases/download/Chainfiles/chainfiles.zip'
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -20,21 +20,21 @@ NC='\033[0m'
 
 function compile_node() {
   echo -e "Preparing to download ${GREEN}$COIN_NAME${NC}"
-  mkdir bcz
-  cd bcz
+  mkdir gxx
+  cd gxx
   wget -q $COIN_REPO
   compile_error
   COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
   tar xvf linux-x64.tar.gz
   compile_error
-  cp bcz-cli /usr/local/bin
-  cp bczd /usr/local/bin
+  cp GravityCoin-cli /usr/local/bin
+  cp GravityCoind /usr/local/bin
   compile_error
   strip $COIN_DAEMON $COIN_CLI
   cd - >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1
-  chmod +x /usr/local/bin/bczd
-  chmod +x /usr/local/bin/bcz-cli
+  chmod +x /usr/local/bin/GravityCoind
+  chmod +x /usr/local/bin/GravityCoin-cli
   clear
 }
 
@@ -87,16 +87,16 @@ function create_config() {
   cat << EOF > $CONFIGFOLDER/$CONFIG_FILE
 rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
-addnode=51.83.98.8
-addnode=51.83.98.12
-addnode=51.83.98.13
-addnode=51.83.98.21
-addnode=51.83.78.28
+rpcallowip=127.0.0.1
+listen=1
+server=1
+daemon=1
+maxconnection=16
 EOF
 }
 
 function create_key() {
-  echo -e "Enter your ${GREEN}$COIN_NAME Masternode GenKey${NC}. Leave it blank to generate a new ${YELLOW}Masternode GenKey${NC} for you:"
+  echo -e "Enter your ${YELLOW}$COIN_NAME Masternode GenKey${NC}. Leave it blank to generate a new ${GREEN}Masternode GenKey${NC} for you:"
   read -e COINKEY
   if [[ -z "$COINKEY" ]]; then
   $COIN_DAEMON -daemon
@@ -121,7 +121,7 @@ function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 #bind=$NODEIP
-masternode=1
+xnode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 EOF
@@ -192,7 +192,7 @@ function checks() {
 }
 
 function prepare_system() {
-  echo -e "Preparing the system to install ${GREEN}$COIN_NAME${NC} masternode."
+  echo -e "Preparing the system to install ${YELLOW}$COIN_NAME${NC} masternode."
   echo -e "This might take 15-20 minutes and the screen will not move, so please be patient."
   apt-get update >/dev/null 2>&1
   DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null 2>&1
@@ -225,37 +225,38 @@ function prepare_system() {
 function important_information() {
  echo
  echo -e "================================================================================================================================"
- echo -e "$COIN_NAME Masternode is up and running listening on port ${GREEN}$COIN_PORT${NC}."
- echo -e "Configuration file is: ${GREEN}$CONFIGFOLDER/$CONFIG_FILE${NC}"
- echo -e "Start: ${GREEN}systemctl start $COIN_NAME.service${NC}"
- echo -e "Stop: ${GREEN}systemctl stop $COIN_NAME.service${NC}"
- echo -e "VPS_IP:PORT ${GREEN}$NODEIP:$COIN_PORT${NC}"
- echo -e "MASTERNODE GENKEY is: ${GREEN}$COINKEY${NC}"
+ echo -e "$COIN_NAME Masternode is up and running listening on port ${YELLOW}$COIN_PORT${NC}."
+ echo -e "Configuration file is: ${YELLOW}$CONFIGFOLDER/$CONFIG_FILE${NC}"
+ echo -e "Start: ${YELLOW}systemctl start $COIN_NAME.service${NC}"
+ echo -e "Stop: ${YELLOW}systemctl stop $COIN_NAME.service${NC}"
+ echo -e "VPS_IP:PORT ${YELLOW}$NODEIP:$COIN_PORT${NC}"
+ echo -e "MASTERNODE GENKEY is: ${YELLOW}$COINKEY${NC}"
  if [[ -n $SENTINEL_REPO  ]]; then
   echo -e "${GREEN}Sentinel${NC} is installed in ${YELLOW}/sentinel${NC}"
   echo -e "Sentinel logs is: ${YELLOW}$CONFIGFOLDER/sentinel.log${NC}"
  fi
- echo -e "Please check ${GREEN}$COIN_NAME${NC} is running with the following command: ${GREEN}systemctl status $COIN_NAME.service${NC}"
+ echo -e "Please check ${YELLOW}$COIN_NAME${NC} is running with the following command: ${YELLOW}systemctl status $COIN_NAME.service${NC}"
  echo -e "================================================================================================================================"
 }
 
 function import_bootstrap() {
+  cd $CONFIGFOLDER
   wget -q $COIN_BS
   compile_error
   COIN_ZIP=$(echo $COIN_BS | awk -F'/' '{print $NF}')
-  unzip $COIN_ZIP >/dev/null 2>&1
+  unzip chainfiles.zip
   compile_error
-  cp -r ~/bootstrap/blocks ~/.bcz/blocks
-  cp -r ~/bootstrap/chainstate ~/.bcz/chainstate
-  cp -r ~/bootstrap/peers.dat ~/.bcz/peers.dat
-  rm -r ~/bootstrap/
+  cp -r ~/.GravityCoin/blocks
+  cp -r ~/.GravityCoin/chainstate
+  cp -r ~/.GravityCoin/peers.dat
   rm $COIN_ZIP
+  rm -r chainfiles.zip
 }
 
 function setup_node() {
   get_ip
   create_config
-  #import_bootstrap
+  import_bootstrap
   create_key
   update_config
   enable_firewall
