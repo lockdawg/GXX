@@ -19,7 +19,7 @@ YELLOW='\033[0;33m'
 NC='\033[0m'
 
 function compile_node() {
-  echo -e "Preparing to download ${GREEN}$COIN_NAME${NC}"
+  echo -e "Preparing to download ${YELLOW}$COIN_NAME${NC}"
   mkdir gxx
   cd gxx
   wget -q $COIN_REPO
