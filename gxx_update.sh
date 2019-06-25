@@ -1,11 +1,11 @@
 #!/bin/bash
 
 TMP_FOLDER=$(mktemp -d)
-COIN_DAEMON='/usr/local/bin/bczd'
-COIN_CLI='/usr/local/bin/bcz-cli'
-COIN_REPO='https://github.com/BitcoinCZ/bitcoincz/releases/download/6.0.0.8/linux-x64.tar.gz'
-COIN_NAME='BCZ'
-#COIN_BS='http://bootstrap.zip'
+COIN_DAEMON='/usr/local/bin/GravityCoind'
+COIN_CLI='/usr/local/bin/GravityCoin-cli'
+COIN_REPO='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/4.0.6.5/linux-x64.tar.gz'
+COIN_NAME='GXX'
+COIN_BS='http://bootstrap.zip'
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
