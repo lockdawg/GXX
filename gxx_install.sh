@@ -240,16 +240,17 @@ function important_information() {
 }
 
 function import_bootstrap() {
-  cd $TMP_BS
+  cd $CONFIGFOLDER
   wget -q $COIN_BS
   compile_error
   COIN_ZIP=$(echo $COIN_BS | awk -F'/' '{print $NF}')
   unzip chainfiles.zip
   compile_error
-  cp -r blocks ~/.GravityCoin/
-  cp -r chainstate ~/.GravityCoin/
+  #cp -r blocks ~/.GravityCoin/
+  #cp -r chainstate ~/.GravityCoin/
+  rm chainfiles.zip
+  #rm -rf $TMP_BS >/dev/null 2>&1
   cd - >/dev/null 2>&1
-  rm -rf $TMP_BS >/dev/null 2>&1
 }
 
 function setup_node() {
