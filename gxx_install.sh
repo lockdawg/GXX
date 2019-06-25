@@ -1,6 +1,7 @@
 #!/bin/bash
 
 TMP_FOLDER=$(mktemp -d)
+TMP_BS=$(mktemp -d)
 CONFIG_FILE='GravityCoin.conf'
 CONFIGFOLDER='/root/.GravityCoin'
 COIN_DAEMON='/usr/local/bin/GravityCoind'
@@ -24,7 +25,7 @@ function compile_node() {
   cd gxx
   wget -q $COIN_REPO
   compile_error
-  #COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
+  COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
   tar xvf linux-x64.tar.gz
   compile_error
   cp GravityCoin-cli /usr/local/bin
@@ -32,7 +33,7 @@ function compile_node() {
   compile_error
   strip $COIN_DAEMON $COIN_CLI
   cd - >/dev/null 2>&1
-  #rm -rf $TMP_FOLDER >/dev/null 2>&1
+  rm -rf $TMP_FOLDER >/dev/null 2>&1
   chmod +x /usr/local/bin/GravityCoind
   chmod +x /usr/local/bin/GravityCoin-cli
   clear
@@ -91,7 +92,7 @@ rpcallowip=127.0.0.1
 listen=1
 server=1
 daemon=1
-maxconnection=16
+xnode=1
 EOF
 }
 
@@ -121,7 +122,6 @@ function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 #bind=$NODEIP
-xnode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 EOF
@@ -240,23 +240,22 @@ function important_information() {
 }
 
 function import_bootstrap() {
-  cd $CONFIGFOLDER
+  cd $TMP_BS
   wget -q $COIN_BS
   compile_error
   COIN_ZIP=$(echo $COIN_BS | awk -F'/' '{print $NF}')
   unzip chainfiles.zip
   compile_error
-  cp -r ~/.GravityCoin/blocks
-  cp -r ~/.GravityCoin/chainstate
-  cp -r ~/.GravityCoin/peers.dat
-  rm $COIN_ZIP
-  rm -r chainfiles.zip
+  cp -r blocks ~/.GravityCoin/
+  cp -r chainstate ~/.GravityCoin/
+  cd - >/dev/null 2>&1
+  rm -rf $TMP_BS >/dev/null 2>&1
 }
 
 function setup_node() {
   get_ip
   create_config
-  #import_bootstrap
+  import_bootstrap
   create_key
   update_config
   enable_firewall
