@@ -20,8 +20,9 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 3. Send **5000** **BCZ** to **MN1**.
 4. Wait for ~15 confirmations before starting the node.
 5. Go to **Help -> "Debug window - Console"**
-6. Type the following command: **masternode outputs**
-7. Open masternode.conf from the following folder %appdata%\wagerr (windows) or ~/Library/Application Support/ (hidden folder for Mac users)
+6a. Type the following command: **masternode outputs**
+6b. Type the following command: **masternode genkey**
+7. Open masternode.conf from the following folder %appdata%\bcz (windows) or ~/Library/Application Support/ (hidden folder for Mac users)
 8. Add the following entry:
 ```
 Alias Address Genkey TxHash Output_index
@@ -29,8 +30,8 @@ Alias Address Genkey TxHash Output_index
 * Alias: **MN1**
 * Address: **VPS_IP:29500**
 * Genkey: **Masternode GenKey**
-* TxHash: **First value from Step 6** 
-* Output index:  **Second value from Step 6** It can be **0** or **1**
+* TxHash: **First value from Step 6a** 
+* Output index:  **Second value from Step 6a** It can be **0** or **1**
 9. Click OK and exit the Wallet.
 10. Open BCZ Core Wallet, go to **Masternode Tab**.
 11. Click **Update status** to see your node. If it is not shown, close the wallet and start it again.
