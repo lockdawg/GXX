@@ -24,7 +24,7 @@ function compile_node() {
   cd gxx
   wget -q $COIN_REPO
   compile_error
-  COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
+  #COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
   tar xvf linux-x64.tar.gz
   compile_error
   cp GravityCoin-cli /usr/local/bin
@@ -32,7 +32,7 @@ function compile_node() {
   compile_error
   strip $COIN_DAEMON $COIN_CLI
   cd - >/dev/null 2>&1
-  rm -rf $TMP_FOLDER >/dev/null 2>&1
+  #rm -rf $TMP_FOLDER >/dev/null 2>&1
   chmod +x /usr/local/bin/GravityCoind
   chmod +x /usr/local/bin/GravityCoin-cli
   clear
