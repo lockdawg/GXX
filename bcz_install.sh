@@ -15,6 +15,7 @@ NODEIP=$(curl -s4 icanhazip.com)
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 NC='\033[0m'
 
 function compile_node() {
@@ -224,17 +225,17 @@ function prepare_system() {
 function important_information() {
  echo
  echo -e "================================================================================================================================"
- echo -e "$COIN_NAME Masternode is up and running listening on port ${RED}$COIN_PORT${NC}."
- echo -e "Configuration file is: ${RED}$CONFIGFOLDER/$CONFIG_FILE${NC}"
- echo -e "Start: ${RED}systemctl start $COIN_NAME.service${NC}"
+ echo -e "$COIN_NAME Masternode is up and running listening on port ${YELLOW}$COIN_PORT${NC}."
+ echo -e "Configuration file is: ${YELLOW}$CONFIGFOLDER/$CONFIG_FILE${NC}"
+ echo -e "Start: ${GREEN}systemctl start $COIN_NAME.service${NC}"
  echo -e "Stop: ${RED}systemctl stop $COIN_NAME.service${NC}"
- echo -e "VPS_IP:PORT ${RED}$NODEIP:$COIN_PORT${NC}"
- echo -e "MASTERNODE GENKEY is: ${RED}$COINKEY${NC}"
+ echo -e "VPS_IP:PORT ${YELLOW}$NODEIP:$COIN_PORT${NC}"
+ echo -e "MASTERNODE GENKEY is: ${YELLOW}$COINKEY${NC}"
  if [[ -n $SENTINEL_REPO  ]]; then
-  echo -e "${RED}Sentinel${NC} is installed in ${RED}/sentinel${NC}"
-  echo -e "Sentinel logs is: ${RED}$CONFIGFOLDER/sentinel.log${NC}"
+  echo -e "${GREEN}Sentinel${NC} is installed in ${YELLOW}/sentinel${NC}"
+  echo -e "Sentinel logs is: ${YELLOW}$CONFIGFOLDER/sentinel.log${NC}"
  fi
- echo -e "Please check ${RED}$COIN_NAME${NC} is running with the following command: ${RED}systemctl status $COIN_NAME.service${NC}"
+ echo -e "Please check ${GREEN}$COIN_NAME${NC} is running with the following command: ${GREEN}systemctl status $COIN_NAME.service${NC}"
  echo -e "================================================================================================================================"
 }
 
