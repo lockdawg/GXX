@@ -5,28 +5,30 @@ COIN_DAEMON='/usr/local/bin/GravityCoind'
 COIN_CLI='/usr/local/bin/GravityCoin-cli'
 COIN_REPO='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/4.0.6.5/linux-x64.tar.gz'
 COIN_NAME='GXX'
-COIN_BS='http://bootstrap.zip'
+COIN_BS='hhttps://github.com/GravityCoinOfficial/GravityCoin/releases/download/Chainfiles/chainfiles.zip'
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
 function update_node() {
-  echo -e "Preparing to download updated $COIN_NAME"
-  rm /usr/local/bin/bcz*
-  cd $TMP_FOLDER
+  echo -e "Preparing to download ${YELLOW}$COIN_NAME${NC}"
+  mkdir gxx
+  cd gxx
   wget -q $COIN_REPO
   compile_error
   COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
   tar xvf linux-x64.tar.gz
   compile_error
-  cp bcz-cli /usr/local/bin
-  cp bczd /usr/local/bin
+  cp GravityCoin-cli /usr/local/bin
+  cp GravityCoind /usr/local/bin
+  compile_error
   strip $COIN_DAEMON $COIN_CLI
   cd - >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1
-  chmod +x $COIN_DAEMON
-  chmod +x $COIN_CLI
+  chmod +x /usr/local/bin/GravityCoind
+  chmod +x /usr/local/bin/GravityCoin-cli
+  clear
   clear
 }
 
@@ -77,18 +79,17 @@ clear
 }
 
 function import_bootstrap() {
-  rm -r ~/.bcz/blocks ~/.bcz/chainstate ~/.bcz/peers.dat
+  cd $CONFIGFOLDER
   wget -q $COIN_BS
   compile_error
   COIN_ZIP=$(echo $COIN_BS | awk -F'/' '{print $NF}')
-  unzip $COIN_ZIP >/dev/null 2>&1
+  unzip chainfiles.zip
   compile_error
-  cp -r ~/bootstrap/blocks ~/.bcz/blocks
-  cp -r ~/bootstrap/chainstate ~/.bcz/chainstate
-  cp -r ~/bootstrap/peers.dat ~/.bcz/peers.dat
-  rm -r ~/bootstrap/
+  cp -r ~/.GravityCoin/blocks
+  cp -r ~/.GravityCoin/chainstate
+  cp -r ~/.GravityCoin/peers.dat
   rm $COIN_ZIP
-  echo -e "Sync is complete"
+  rm -r chainfiles.zip
 }
 
 function important_information() {
@@ -108,5 +109,5 @@ clear
 checks
 prepare_system
 update_node
-#import_bootstrap
+import_bootstrap
 important_information
