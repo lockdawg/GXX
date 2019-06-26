@@ -42,7 +42,7 @@ Alias Address Genkey TxHash Output_index
 ## Usage:
 ```
 GravityCoin-cli getinfo
-GravityCoin-cli masternode status
+GravityCoin-cli xnode status
 ```
 Also, if you want to check/start/stop **BCZ** , run one of the following commands as **root**:
 ```
