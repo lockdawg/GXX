@@ -124,7 +124,7 @@ function update_config() {
 maxconnections=16
 xnode=1
 externalip=$NODEIP:$COIN_PORT
-masternodeprivkey=$COINKEY
+xnodeprivkey=$COINKEY
 EOF
 }
 
