@@ -92,7 +92,6 @@ rpcallowip=127.0.0.1
 listen=1
 server=1
 daemon=1
-xnode=1
 EOF
 }
 
@@ -119,9 +118,10 @@ clear
 }
 
 function update_config() {
-  sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
+  #sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 #bind=$NODEIP
+xnode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 EOF
