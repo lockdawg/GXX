@@ -20,8 +20,8 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 3. Send **2000** **GXX** to **MN1**.
 4. Wait for ~15 confirmations before starting the node.
 5. Go to **Help -> "Debug window - Console"**
-6. Type the following command: **masternode outputs**
-7. Type the following command: **masternode genkey**
+6. Type the following command: **xnode outputs**
+7. Type the following command: **xnode genkey**
 8. Open masternode.conf from the following folder %appdata%\GravityCoin (windows) or ~/Library/Application Support/ (hidden folder for Mac users)
 9. Add the following entry:
 ```
@@ -48,8 +48,8 @@ Also, if you want to check/start/stop **BCZ** , run one of the following command
 ```
 systemctl status GXX #To check the service is running.
 systemctl start GXX #To start BCZ service.
-systemctl stop BCZ #To stop BCZ service.
-systemctl is-enabled GXXZ #To check whether BCZ service is enabled on boot or not.
+systemctl stop GXX #To stop BCZ service.
+systemctl is-enabled GXX #To check whether BCZ service is enabled on boot or not.
 ```
 ***
 
