@@ -15,7 +15,7 @@ bash gxx_install.sh
 ## Desktop wallet setup
 
 After the MN is up and running, you need to configure the desktop wallet accordingly. Here are the steps for Windows/Mac Wallet:
-1. Open the BCZ Core Wallet.
+1. Open the GXX Core Wallet.
 2. Go to RECEIVE and create a New Address: **MN1**
 3. Send **2000** **GXX** to **MN1**.
 4. Wait for ~15 confirmations before starting the node.
@@ -44,19 +44,19 @@ Alias Address Genkey TxHash Output_index
 GravityCoin-cli getinfo
 GravityCoin-cli xnode status
 ```
-Also, if you want to check/start/stop **BCZ** , run one of the following commands as **root**:
+Also, if you want to check/start/stop **GXX** , run one of the following commands as **root**:
 ```
 systemctl status GXX #To check the service is running.
-systemctl start GXX #To start BCZ service.
-systemctl stop GXX #To stop BCZ service.
-systemctl is-enabled GXX #To check whether BCZ service is enabled on boot or not.
+systemctl start GXX #To start GXX service.
+systemctl stop GXX #To stop GXX service.
+systemctl is-enabled GXX #To check whether GXX service is enabled on boot or not.
 ```
 ***
 
-## Updating BCZ
-The first line (rm bcz_update.sh) is not required the very first time you update the node and will return an error if you run it.  This is fine, continue with the update script.
+## Updating GXX
+The first line (rm gxx_update.sh) is not required the very first time you update the node and will return an error if you run it.  This is fine, continue with the update script.
 ```
-rm bcz_update.sh*
+rm gxx_update.sh*
 wget -q https://raw.githubusercontent.com/lockdawg/GXX/master/gxx_update.sh
 bash gxx_update.sh
 ```
