@@ -29,7 +29,6 @@ function update_node() {
   chmod +x /usr/local/bin/GravityCoind
   chmod +x /usr/local/bin/GravityCoin-cli
   clear
-  clear
 }
 
 function compile_error() {
