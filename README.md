@@ -1,7 +1,7 @@
 #GXX
 Use this shell script to install a [GXX Masternode](https://www.gravitycoin.io/) on a Linux server running Ubuntu 16.04.  
 This will require a VPS, I use [Vultr](https://www.vultr.com/?ref=7310394).  I recommend using a $5 server.
-This script will install **GXX Core v4.0.6.5 **.
+This script will install **GXX Core v4.0.6.6 **.
 ***
 
 ## Installation:
@@ -17,7 +17,7 @@ bash gxx_install.sh
 After the MN is up and running, you need to configure the desktop wallet accordingly. Here are the steps for Windows/Mac Wallet:
 1. Open the GXX Core Wallet.
 2. Go to RECEIVE and create a New Address: **MN1**
-3. Send **2000** **GXX** to **MN1**.
+3. Send **10000** **GXX** to **MN1**.
 4. Wait for ~15 confirmations before starting the node.
 5. Go to **Help -> "Debug window - Console"**
 6. Type the following command: **xnode outputs**
