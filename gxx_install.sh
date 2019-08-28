@@ -10,7 +10,7 @@ COIN_REPO='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/
 COIN_NAME='GXX'
 COIN_RPC=29200
 COIN_PORT=29100
-COIN_BS='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/Chainfiles/chainfiles.zip'
+COIN_BS='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/4.0.7.1/linux-x64.tar.gz'
 
 NODEIP=$(curl -s4 icanhazip.com)
 
