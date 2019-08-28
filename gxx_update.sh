@@ -3,7 +3,7 @@
 TMP_FOLDER=$(mktemp -d)
 COIN_DAEMON='/usr/local/bin/GravityCoind'
 COIN_CLI='/usr/local/bin/GravityCoin-cli'
-COIN_REPO='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/4.0.6.6/linux-x64.tar.gz'
+COIN_REPO='https://github.com/GravityCoinOfficial/GravityCoin/releases/download/4.0.7.1/linux-x64.tar.gz'
 COIN_NAME='GXX'
 COIN_BS='hhttps://github.com/GravityCoinOfficial/GravityCoin/releases/download/Chainfiles/chainfiles.zip'
 
