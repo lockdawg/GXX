@@ -1,7 +1,7 @@
 #GXX
 Use this shell script to install a [GXX Masternode](https://www.gravitycoin.io/) on a Linux server running Ubuntu 16.04.  
 This will require a VPS, I use [Vultr](https://www.vultr.com/?ref=7310394).  I recommend using a $5 server.
-This script will install **GXX Core v4.0.6.6 **.
+This script will install **GXX Core v4.0.7.1 **.
 ***
 
 ## Installation:
